@@ -1,7 +1,8 @@
 import { useTable } from "react-table";
-import useRows from "./componentes/filas.js";
-import useColumns from "./componentes/columnnas.js";
+import useRows from "./componentes/filas";
+import useColumns from "./componentes/columnas";
 
+import "./style.css";
 
 export default function App() {
   const columns = useColumns();
