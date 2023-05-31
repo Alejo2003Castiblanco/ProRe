@@ -1,95 +1,95 @@
 import { useMemo } from "react";
 
 export default function useRows() {
- const rows = useMemo(
-   () => [
-     {
-       marca: "Audi",
-       modelo: "A3",
-       segmento: "Sedan, Convertible",
-       anio: "2015"
-     },
-     {
-       marca: "Audi",
-       modelo: "A3",
-       segmento: "Wagon",
-       anio: "2013"
-     },
-     {
-       marca: "Audi",
-       modelo: "A3 Sportback e-tron",
-       segmento: "Wagon",
-       anio: "2016"
-     },
-     {
-       marca: "Audi",
-       modelo: "A4",
-       segmento: "Sedan, Convertible",
-       anio: "2006"
-     },
-     {
-       marca: "Audi",
-       modelo: "A4",
-       segmento: "Sedan, Wagon",
-       anio: "2001"
-     },
-     {
-       marca: "Audi",
-       modelo: "A4 allroad",
-       segmento: "Wagon",
-       anio: "2019"
-     },
-     {
-       marca: "Audi",
-       modelo: "A5",
-       segmento: "Coupe",
-       anio: "2008"
-     },
-     {
-       marca: "Audi",
-       modelo: "A5 Sport",
-       segmento: "Convertible, Coupe",
-       anio: "2017"
-     },
-     {
-       marca: "Audi",
-       modelo: "Q3",
-       segmento: "SUV",
-       anio: "2020"
-     },
-     {
-       marca: "Audi",
-       modelo: "R8",
-       segmento: "Coupe",
-       anio: "2008"
-     },
-     {
-       marca: "Audi",
-       modelo: "TT",
-       segmento: "Coupe",
-       anio: "2019"
-     },
-     {
-       marca: "Audi",
-       modelo: "Q7",
-       segmento: "SUV",
-       anio: "2015"
-     },
-     {
-       marca: "Audi",
-       modelo: "Q8",
-       segmento: "SUV",
-       anio: "2019"
-     },
-     {
-       marca: "Audi",
-       modelo: "Cabriolet",
-       segmento: "Convertible, Coupe",
-       anio: "1996"
-     }
-   ],
-   []
- );
+  const rows = useMemo(
+    () => [
+      {
+        brand: "Audi",
+        model: "A3",
+        segment: "Sedan, Convertible",
+        year: "2015"
+      },
+      {
+        brand: "Audi",
+        model: "A3",
+        segment: "Wagon",
+        year: "2013"
+      },
+      {
+        brand: "Audi",
+        model: "A3 Sportback e-tron",
+        segment: "Wagon",
+        year: "2016"
+      },
+      {
+        brand: "Audi",
+        model: "A4",
+        segment: "Sedan, Convertible",
+        year: "2006"
+      },
+      {
+        brand: "Audi",
+        model: "A4",
+        segment: "Sedan, Wagon",
+        year: "2001"
+      },
+      {
+        brand: "Audi",
+        model: "A4 allroad",
+        segment: "Wagon",
+        year: "2019"
+      },
+      {
+        brand: "Audi",
+        model: "A5",
+        segment: "Coupe",
+        year: "2008"
+      },
+      {
+        brand: "Audi",
+        model: "A5 Sport",
+        segment: "Convertible, Coupe",
+        year: "2017"
+      },
+      {
+        brand: "Audi",
+        model: "Q3",
+        segment: "SUV",
+        year: "2020"
+      },
+      {
+        brand: "Audi",
+        model: "R8",
+        segment: "Coupe",
+        year: "2008"
+      },
+      {
+        brand: "Audi",
+        model: "TT",
+        segment: "Coupe",
+        year: "2019"
+      },
+      {
+        brand: "Audi",
+        model: "Q7",
+        segment: "SUV",
+        year: "2015"
+      },
+      {
+        brand: "Audi",
+        model: "Q8",
+        segment: "SUV",
+        year: "2019"
+      },
+      {
+        brand: "Audi",
+        model: "Cabriolet",
+        segment: "Convertible, Coupe",
+        year: "1996"
+      }
+    ],
+    []
+  );
 
- return rows;
+  return rows;
 }
