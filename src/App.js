@@ -1,39 +1,62 @@
-import { useTable } from "react-table";
+import { useTable, usePagination } from "react-table";
 import useRows from "./componentes/filas";
 import useColumns from "./componentes/columnas";
+
 
 import "./style.css";
 
 export default function App() {
   const columns = useColumns();
   const data = useRows();
-  const table = useTable({ columns, data });
+  const table = useTable(
+    {
+      columns,
+      data,
+      initialState: {
+        pageSize: 5,
+        pageIndex: 0
+      }
+    },
+    usePagination
+  );
 
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    rows,
-    prepareRow
+    prepareRow,
+    page,
+    canPreviousPage,
+    canNextPage,
+    pageOptions,
+    pageCount,
+    gotoPage,
+    nextPage,
+    previousPage,
+    setPageSize,
+    BiFirstPage,
+    BiLastPage,
+    MdKeyboardArrowLeft,
+    MdKeyboardArrowRight,
+    state: { pageIndex, pageSize, }
   } = table;
 
   return (
     <div className="container">
-      {/* Añadimos las propiedades a nuestra tabla nativa */}
       <table {...getTableProps()}>
         <thead>
           {
-            // Recorremos las columnas
+            // Loop over the header rows
             headerGroups.map((headerGroup) => (
-              // Añadimos las propiedades al conjunto de columnas
+              // Apply the header row props
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {
-                  // Recorremos cada columna del conjunto para acceder a su información
+                  // Loop over the headers in each row
                   headerGroup.headers.map((column) => (
-                    // Añadimos las propiedades a cada celda de la cabecera
+                    // Apply the header cell props
                     <th {...column.getHeaderProps()}>
                       {
-                        // Pintamos el título de nuestra columna (propiedad "Header")
+                        // Render the header
                         column.render("Header")
                       }
                     </th>
@@ -43,24 +66,24 @@ export default function App() {
             ))
           }
         </thead>
-        {/* Añadimos las propiedades al cuerpo de la tabla */}
+        {/* Apply the table body props */}
         <tbody {...getTableBodyProps()}>
           {
-            // Recorremos las filas
-            rows.map((row) => {
-              // Llamamos a la función que prepara la fila previo renderizado
+            // Loop over the table rows
+            page.map((row) => {
+              // Prepare the row for display
               prepareRow(row);
               return (
-                // Añadimos las propiedades a la fila
+                // Apply the row props
                 <tr {...row.getRowProps()}>
                   {
-                    // Recorremos cada celda de la fila
+                    // Loop over the rows cells
                     row.cells.map((cell) => {
-                      // Añadimos las propiedades a cada celda de la fila
+                      // Apply the cell props
                       return (
                         <td {...cell.getCellProps()}>
                           {
-                            // Pintamos el contenido de la celda
+                            // Render the cell contents
                             cell.render("Cell")
                           }
                         </td>
@@ -73,6 +96,70 @@ export default function App() {
           }
         </tbody>
       </table>
+      <div className="pagination">
+        <span>
+          Page&nbsp;
+          <strong>
+            {pageIndex + 1} of {pageOptions.length}
+          </strong>{" "}
+        </span>
+        <div>
+          <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+            <BiFirstPage className="page-controller" />
+          </button>{" "}
+          <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+            <MdKeyboardArrowLeft className="page-controller" />
+          </button>{" "}
+          <button onClick={() => nextPage()} disabled={!canNextPage}>
+            <MdKeyboardArrowRight className="page-controller" />
+          </button>{" "}
+          <button
+            onClick={() => gotoPage(pageCount - 1)}
+            disabled={!canNextPage}
+          >
+            <BiLastPage className="page-controller" />
+          </button>{" "}
+        </div>
+        <select
+          value={pageSize}
+          onChange={(e) => setPageSize(Number(e.target.value))}
+        >
+          {[5, 10, 15].map((pageSize) => (
+            <option key={pageSize} value={pageSize}>
+              {pageSize !== 15 ? `Show ${pageSize}` : `Show all`}
+            </option>
+          ))}
+        </select>
+        <div className="pagination">
+       <span>
+         Página
+         <strong>
+           {pageIndex + 1} de {pageOptions.length}
+         </strong>
+       </span>
+       <div className="controls">
+<button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+           <BiFirstPage className="page-controller" />
+         </button>
+         <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+           <MdKeyboardArrowLeft className="page-controller" />
+         </button>
+         <button onClick={() => nextPage()} disabled={!canNextPage}>
+           <MdKeyboardArrowRight className="page-controller" />
+         </button>
+         <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+           <BiLastPage className="page-controller" />
+         </button>
+       </div>
+       <select value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
+         {[5, 10, 15].map(pageSize => (
+           <option key={pageSize} value={pageSize}>
+             Mostrar {pageSize}
+           </option>
+         ))}
+       </select>
+     </div>
+      </div>
     </div>
   );
 }
